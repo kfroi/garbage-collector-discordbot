@@ -37,4 +37,4 @@ async function execute(ctx) {
   await ctx.reply({ embeds: [withCacheFooter(sub.build(res.data, username), res)] });
 }
 
-module.exports = { data, execute, aliases: ['t', 'tr', 'stats'] };
+module.exports = { data, execute, aliases: ['t', 'tr'] };
