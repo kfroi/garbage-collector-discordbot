@@ -54,7 +54,12 @@ function start() {
 
     c.user.setPresence({
       status: 'online',
-      activities: [{ name: 'TETR.IO garbage collection', type: ActivityType.Playing }],
+      activities: [{
+        name: 'TETR.IO',
+        type: ActivityType.Playing,
+        state: 'Collection garbage',
+        details: 'Monitoring the stack',
+      }],
     });
     console.log(`Logged in as ${c.user.tag}. Prefix: ${PREFIX} • ${commands.list.length} commands loaded.`);
   });
