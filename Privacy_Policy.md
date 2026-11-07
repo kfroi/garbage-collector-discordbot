@@ -1,4 +1,4 @@
-# Garbage Collection Privacy Policy
+# Garbage Collector Privacy Policy
 
 ## 1. Information Stored
 
