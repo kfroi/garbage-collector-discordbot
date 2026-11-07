@@ -1,0 +1,22 @@
+{
+  "name": "tetrio-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot that turns the TETRA CHANNEL API (ch.tetr.io) into rich embeds. Slash commands + t? prefix commands.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js",
+    "deploy:cleanup": "node src/deploy-commands.js cleanup",
+    "check": "node scripts/check-syntax.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.28.1",
+    "dotenv": "^16.6.1"
+  }
+}
