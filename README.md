@@ -1,5 +1,8 @@
 # TETR.IO Discord Bot
 
+Invite Garbage Collector to your server!
+> https://discord.com/oauth2/authorize?client_id=1568477666196328448&scope=bot%20applications.commands&permissions=83968
+
 A Discord bot that reads player and server data from the **TETRA CHANNEL API** (`https://ch.tetr.io/api/`) and shows it as tidy Discord embeds. Every endpoint in the [official API docs](https://tetr.io/about/api/) is covered. Every command works two ways:
 
 - as a **slash command**: `/tetrio league username:osk`
