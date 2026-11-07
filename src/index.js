@@ -2,7 +2,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
-const { Client, GatewayIntentBits, Events, Partials } = require('discord.js');
+const { Client, GatewayIntentBits, Events, Partials, ActivityType } = require('discord.js');
 const { fromInteraction, fromMessage, tokenize } = require('./utils/context');
 const { buildErrorEmbed } = require('./embeds/common');
 const { handleButton } = require('./utils/pagination');
@@ -45,7 +45,19 @@ function start() {
     partials: [Partials.Channel],
   });
 
-  client.once(Events.ClientReady, (c) => console.log(`Logged in as ${c.user.tag}. Prefix: ${PREFIX} • ${commands.list.length} commands loaded.`));
+  client.once(Events.ClientReady, async (c) => {
+    try {
+      await c.user.setAvatar(fs.readFileSync(path.join(__dirname, 'icon', 'tetrio-anim.gif')));
+    } catch (err) {
+      console.error('[avatar] failed to apply src/icon/tetrio-anim.gif', err);
+    }
+
+    c.user.setPresence({
+      status: 'online',
+      activities: [{ name: 'TETR.IO garbage collection', type: ActivityType.Playing }],
+    });
+    console.log(`Logged in as ${c.user.tag}. Prefix: ${PREFIX} • ${commands.list.length} commands loaded.`);
+  });
 
   client.on(Events.InteractionCreate, async (interaction) => {
     if (interaction.isButton()) {
