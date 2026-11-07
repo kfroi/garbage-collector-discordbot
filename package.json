@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node src/index.js",
     "deploy": "node src/deploy-commands.js",
+    "deploy:global": "node src/deploy-commands.js global",
     "deploy:cleanup": "node src/deploy-commands.js cleanup",
     "check": "node scripts/check-syntax.js",
     "test": "node --test test/*.test.js"

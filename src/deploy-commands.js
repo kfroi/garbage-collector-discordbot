@@ -13,11 +13,14 @@ async function deploy() {
     console.log(`Removed all guild commands from ${GUILD_ID}.`);
     return;
   }
-  const body = loadCommands().list.map((c) => c.data.toJSON());
+  const body = loadCommands().list.map((c) => c.data.setDMPermission(true).toJSON());
   const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN);
-  const route = GUILD_ID ? Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID) : Routes.applicationCommands(CLIENT_ID);
+  const global = process.argv[2] === 'global';
+  const route = GUILD_ID && !global
+    ? Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID)
+    : Routes.applicationCommands(CLIENT_ID);
   const result = await rest.put(route, { body });
-  console.log(`Registered ${result.length} commands ${GUILD_ID ? `in guild ${GUILD_ID} (instant)` : 'globally (can take up to 1h to appear)'}.`);
+  console.log(`Registered ${result.length} commands ${global || !GUILD_ID ? 'globally (can take up to 1h to appear)' : `in guild ${GUILD_ID} (instant)`}.`);
 }
 
 deploy().catch((err) => { console.error('Deploy failed:', err); process.exit(1); });

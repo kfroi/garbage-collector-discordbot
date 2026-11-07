@@ -57,7 +57,7 @@ function start() {
       activities: [{
         name: 'TETR.IO',
         type: ActivityType.Playing,
-        state: 'Collection garbage',
+        state: 'Collecting garbage',
         details: 'Monitoring the stack',
       }],
     });

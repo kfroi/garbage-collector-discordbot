@@ -53,6 +53,7 @@ test/
 - **`embeds/` are pure functions** (data in, `EmbedBuilder` out). They never fetch anything, which makes them easy to tweak and easy to test with sample JSON (see `test/fixtures`).
 - **`commands/` each export `{ data, execute }`.** `index.js` loads every file in the folder, so a new command is just a new file.
 - **`deploy-commands.js` is separate** because you only need to register commands when their definitions change. Registering on every startup can hit Discord's rate limits.
+- Run `npm run deploy:global` to register slash commands for DMs and app installations. `npm run deploy` remains guild-scoped when `GUILD_ID` is configured for instant testing.
 - **`utils/context.js` makes one `execute()` serve both styles.** A slash interaction and a `t?` message both get turned into the same plain object:
   `{ kind, subcommand, options: { name: value }, defer(), reply(payload) }`.
   Prefix arguments are parsed **using the slash command's own definition** (option names, types, choices, min/max), so you only describe a command once.
