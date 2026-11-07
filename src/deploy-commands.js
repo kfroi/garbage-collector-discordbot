@@ -13,7 +13,11 @@ async function deploy() {
     console.log(`Removed all guild commands from ${GUILD_ID}.`);
     return;
   }
-  const body = loadCommands().list.map((c) => c.data.setDMPermission(true).toJSON());
+  const body = loadCommands().list.map((c) => c.data
+    .setDMPermission(true)
+    .setContexts(0, 1, 2)
+    .setIntegrationTypes(0, 1)
+    .toJSON());
   const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN);
   const global = process.argv[2] === 'global';
   const route = GUILD_ID && !global
