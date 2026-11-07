@@ -120,6 +120,4 @@ Prefix arguments go in the listed order. You can also write them as `name:value`
 
 Aliases: `t?t` / `t?tio` / `t?user` = `tetrio`, `t?lb` = `leaderboard`, `t?rec` = `records`, `t?ach` = `achievement`, `t?stats` = `server`, `t?h` = `help`.
 
-**Pagination:** paginated embeds end with a "Next page" hint containing a cursor (a *prisecter*). Copy it to get the next page, e.g. `t?lb users xp after:123.4:0:0`.
-
 ---
