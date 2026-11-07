@@ -1,27 +1,6 @@
 const { baseEmbed, addField } = require('./common');
 const f = require('../utils/format');
-
-const RANK_EMOJIS = {
-  'x+': ['x_plus', '1568516330699751464'],
-  x: ['x_', '1568515773419356210'],
-  u: ['u_1', '1568515772169457784'],
-  ss: ['ss', '1568515770726490234'],
-  's+': ['s_plus', '1568516729787645962'],
-  s: ['s_', '1568515766653812886'],
-  's-': ['s_minus', '1568516682148741171'],
-  'a+': ['a_plus', '1568516411867926598'],
-  a: ['a_', '1568515754851049545'],
-  'a-': ['a_minus', '1568516182829563965'],
-  'b+': ['b_plus', '1568516585952383067'],
-  b: ['b_', '1568515758378590298'],
-  'b-': ['b_minus', '1568516563206676572'],
-  'c+': ['c_plus', '1568516495774843024'],
-  c: ['c_', '1568515761750675577'],
-  'c-': ['c_minus', '1568516459607494686'],
-  'd+': ['d_plus', '1568516634111639602'],
-  d: ['d_', '1568515764141690881'],
-  z: ['u_1', '1568515772169457784'],
-};
+const { rankIcon } = require('../utils/rank-emojis');
 
 /** /labs/scoreflow/:user/:gamemode — points are [tsOffset, isPB, score]. */
 function buildScoreflowEmbed(d, { username, gamemode }) {
@@ -67,11 +46,6 @@ function buildLeagueRanksEmbed(d) {
   const lines = ranks.map(([k, r]) => `${rankIcon(k)} **${String(k).toUpperCase()}** — ≥ ${f.formatNumber(r.tr, 0)} TR • top ${f.formatPercent(r.percentile, 1)} • ${f.formatNumber(r.count)} players`);
   embed.setDescription(`${f.formatNumber(point.total)} ranked players${d && d.t ? ` • updated ${f.discordTime(d.t)}` : ''}\n\n**Ranks**\n${lines.join('\n')}`);
   return embed;
-}
-
-function rankIcon(rank) {
-  const [name, id] = RANK_EMOJIS[String(rank || 'z').toLowerCase()] || [];
-  return name ? `<:${name}:${id}>` : f.rankEmoji(rank);
 }
 
 module.exports = { buildScoreflowEmbed, buildLeagueflowEmbed, buildLeagueRanksEmbed };

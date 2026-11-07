@@ -1,6 +1,7 @@
 const { baseEmbed, addField } = require('./common');
 const f = require('../utils/format');
 const { stats } = require('./record');
+const { rankIcon } = require('../utils/rank-emojis');
 
 /** Compact one-embed overview of /users/:user/summaries (every mode). */
 function buildAllSummariesEmbed(data, username) {
@@ -9,7 +10,7 @@ function buildAllSummariesEmbed(data, username) {
   const embed = baseEmbed(`Overview — ${username}`, f.rankColor(lg.rank));
   const s40 = d['40l'] || {};
   const bl = d.blitz || {};
-  addField(embed, 'TETRA LEAGUE', f.isNum(lg.tr) && lg.tr >= 0 ? `${f.rankEmoji(lg.rank)}\n${f.formatNumber(lg.tr, 0)} TR ${f.posOrDash(lg.standing)}` : 'Unranked');
+  addField(embed, 'TETRA LEAGUE', f.isNum(lg.tr) && lg.tr >= 0 ? `${rankIcon(lg.rank, f.rankEmoji)}\n${f.formatNumber(lg.tr, 0)} TR ${f.posOrDash(lg.standing)}` : 'Unranked');
   addField(embed, '40 LINES', s40.record ? `${f.formatTime(stats(s40.record).finaltime)} ${f.posOrDash(s40.rank)}` : 'Not played');
   addField(embed, 'BLITZ', bl.record ? `${f.formatNumber(stats(bl.record).score)} ${f.posOrDash(bl.rank)}` : 'Not played');
   for (const [key, label] of [['zenith', 'QUICK PLAY'], ['zenithex', 'EXPERT QP']]) {
